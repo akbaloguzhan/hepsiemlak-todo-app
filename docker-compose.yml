@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    image: todo-app
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      COUCHBASE_HOST: couchbase
+      COUCHBASE_BUCKET: todo-bucket
+      COUCHBASE_USERNAME: admin
+      COUCHBASE_PASSWORD: admin123
+    depends_on:
+      - couchbase
+  couchbase:
+    image: couchbase:community
+    ports:
+      - "8091-8094:8091-8094"
+      - "11210:11210"
